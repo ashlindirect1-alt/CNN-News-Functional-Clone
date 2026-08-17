@@ -1,0 +1,122 @@
+[
+    {
+        "id": 1,
+        "category": "World",
+        "title": "Global Leaders Meet to Discuss Major International Issues",
+        "description": "World leaders gathered for discussions focused on cooperation, development and global challenges.",
+        "content": "World leaders have gathered for an international meeting focused on cooperation and major global challenges. Representatives discussed development, technology, trade and opportunities for stronger international partnerships.",
+        "author": "News Desk",
+        "date": "August 15, 2026",
+        "image": "https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+        "id": 2,
+        "category": "Technology",
+        "title": "New Technology Trends Are Changing the Digital World",
+        "description": "Artificial intelligence and emerging technologies continue to transform how people work and communicate.",
+        "content": "Technology continues to develop rapidly, with artificial intelligence, cloud computing and digital tools becoming increasingly important. Developers and businesses are exploring new ways to use technology to solve everyday problems.",
+        "author": "Tech Desk",
+        "date": "August 15, 2026",
+        "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+        "id": 3,
+        "category": "Sports",
+        "title": "Major Sporting Events Attract Fans Around the World",
+        "description": "Sports fans are following major competitions and supporting their favorite teams and athletes.",
+        "content": "Sports events continue to attract audiences around the world. Teams and athletes are preparing for important competitions while fans follow the latest results, performances and announcements.",
+        "author": "Sports Desk",
+        "date": "August 15, 2026",
+        "image": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+        "id": 4,
+        "category": "Business",
+        "title": "Businesses Explore New Opportunities in the Digital Economy",
+        "description": "Companies are adopting digital strategies to improve services and reach new customers.",
+        "content": "Businesses are increasingly investing in digital platforms and new technologies. Experts say that digital transformation is creating opportunities for companies of different sizes.",
+        "author": "Business Desk",
+        "date": "August 14, 2026",
+        "image": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+        "id": 5,
+        "category": "Entertainment",
+        "title": "Entertainment Industry Embraces New Digital Experiences",
+        "description": "Creators are using new platforms and technology to connect with audiences.",
+        "content": "The entertainment industry continues to evolve as creators experiment with digital platforms and new forms of storytelling. Audiences now have more ways to discover movies, shows, music and other creative content.",
+        "author": "Entertainment Desk",
+        "date": "August 14, 2026",
+        "image": "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+        "id": 6,
+        "category": "Politics",
+        "title": "Government Officials Discuss New Public Initiatives",
+        "description": "Officials discussed plans and initiatives aimed at improving public services.",
+        "content": "Government representatives discussed several public initiatives and development plans. The discussions focused on improving services and addressing priorities identified by communities.",
+        "author": "Politics Desk",
+        "date": "August 13, 2026",
+        "image": "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+        "id": 7,
+        "category": "World",
+        "title": "Countries Work Together on Global Development",
+        "description": "International organizations are working together to support development and cooperation.",
+        "content": "Countries and international organizations are continuing discussions about development, cooperation and shared global priorities.",
+        "author": "World Desk",
+        "date": "August 12, 2026",
+        "image": "https://images.unsplash.com/photo-1523731407965-2430cd12f5e4?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+        "id": 8,
+        "category": "Technology",
+        "title": "Developers Build New Digital Tools for Everyday Life",
+        "description": "New digital tools are helping people work, learn and communicate more efficiently.",
+        "content": "Developers around the world continue to build digital tools that make everyday activities easier. Modern applications are becoming more useful across education, business and communication.",
+        "author": "Technology Desk",
+        "date": "August 12, 2026",
+        "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+        "id": 9,
+        "category": "Sports",
+        "title": "Athletes Prepare for Upcoming International Competitions",
+        "description": "Athletes are preparing for major competitions and training for the upcoming season.",
+        "content": "Athletes and teams are preparing for upcoming competitions. Training programs and preparation continue as sports organizations announce their schedules.",
+        "author": "Sports Desk",
+        "date": "August 11, 2026",
+        "image": "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+        "id": 10,
+        "category": "Business",
+        "title": "Digital Businesses Continue to Expand",
+        "description": "Companies are investing in online services and digital platforms.",
+        "content": "Digital businesses are expanding their services as more organizations adopt online platforms and modern technologies.",
+        "author": "Business Desk",
+        "date": "August 11, 2026",
+        "image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+        "id": 11,
+        "category": "Entertainment",
+        "title": "New Creative Projects Attract Global Audiences",
+        "description": "Creative industries are producing new projects for audiences around the world.",
+        "content": "Creators continue to develop new projects across film, television and digital media. New platforms are providing additional opportunities for creative professionals.",
+        "author": "Entertainment Desk",
+        "date": "August 10, 2026",
+        "image": "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+        "id": 12,
+        "category": "Politics",
+        "title": "Officials Announce Plans for Future Public Services",
+        "description": "Officials presented plans focused on improving public services.",
+        "content": "Government officials have presented new plans focused on improving public services and supporting communities through future development programs.",
+        "author": "Politics Desk",
+        "date": "August 10, 2026",
+        "image": "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1200&q=80"
+    }
+]

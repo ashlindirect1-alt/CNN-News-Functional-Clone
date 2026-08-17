@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CNN Clone - News</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">CNN</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="#world">World</a>
+        <a href="#politics">Politics</a>
+        <a href="#business">Business</a>
+        <a href="#technology">Technology</a>
+        <a href="#sports">Sports</a>
+        <a href="#entertainment">Entertainment</a>
+    </nav>
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search news..."
+        >
+
+        <button id="searchBtn">
+            Search
+        </button>
+    </div>
+
+</header>
+
+
+<div class="breaking">
+
+    <strong>BREAKING NEWS</strong>
+
+    <span id="breakingText">
+        Loading latest headlines...
+    </span>
+
+</div>
+
+
+<main>
+
+    <section class="hero">
+
+        <div>
+
+            <span class="hero-label">
+                CNN NEWS
+            </span>
+
+            <h1>
+                Latest News
+            </h1>
+
+            <p>
+                Stay updated with the latest stories from around the world.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SEARCH RESULTS -->
+
+    <section id="searchSection" class="hidden">
+
+        <h2>Search Results</h2>
+
+        <div
+            id="searchResults"
+            class="news-grid">
+        </div>
+
+    </section>
+
+
+    <!-- TOP STORIES -->
+
+    <section>
+
+        <h2>Top Stories</h2>
+
+        <div
+            id="featuredNews"
+            class="news-grid">
+        </div>
+
+    </section>
+
+
+    <!-- WORLD -->
+
+    <section id="world">
+
+        <h2>World</h2>
+
+        <div
+            id="worldNews"
+            class="news-grid">
+        </div>
+
+    </section>
+
+
+    <!-- POLITICS -->
+
+    <section id="politics">
+
+        <h2>Politics</h2>
+
+        <div
+            id="politicsNews"
+            class="news-grid">
+        </div>
+
+    </section>
+
+
+    <!-- BUSINESS -->
+
+    <section id="business">
+
+        <h2>Business</h2>
+
+        <div
+            id="businessNews"
+            class="news-grid">
+        </div>
+
+    </section>
+
+
+    <!-- TECHNOLOGY -->
+
+    <section id="technology">
+
+        <h2>Technology</h2>
+
+        <div
+            id="technologyNews"
+            class="news-grid">
+        </div>
+
+    </section>
+
+
+    <!-- SPORTS -->
+
+    <section id="sports">
+
+        <h2>Sports</h2>
+
+        <div
+            id="sportsNews"
+            class="news-grid">
+        </div>
+
+    </section>
+
+
+    <!-- ENTERTAINMENT -->
+
+    <section id="entertainment">
+
+        <h2>Entertainment</h2>
+
+        <div
+            id="entertainmentNews"
+            class="news-grid">
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="logo">CNN</div>
+
+    <p>
+        CNN Clone • Functional News Website
+    </p>
+
+    <p>
+        CWI Task 34
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

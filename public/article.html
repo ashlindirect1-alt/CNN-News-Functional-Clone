@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>News Article - CNN Clone</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body>
+
+
+<header class="header">
+
+    <div class="logo">
+        CNN
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="index.html#world">
+            World
+        </a>
+
+        <a href="index.html#politics">
+            Politics
+        </a>
+
+        <a href="index.html#business">
+            Business
+        </a>
+
+        <a href="index.html#technology">
+            Technology
+        </a>
+
+        <a href="index.html#sports">
+            Sports
+        </a>
+
+        <a href="index.html#entertainment">
+            Entertainment
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main class="article-container">
+
+
+    <div id="article">
+
+        <div class="loading">
+            Loading article...
+        </div>
+
+    </div>
+
+
+    <!-- COMMENTS -->
+
+    <section class="comments">
+
+        <h2>
+            Comments
+        </h2>
+
+
+        <textarea
+            id="commentInput"
+            placeholder="Write your comment..."
+        ></textarea>
+
+
+        <button id="commentBtn">
+            Post Comment
+        </button>
+
+
+        <div id="commentsList"></div>
+
+    </section>
+
+
+</main>
+
+
+<footer>
+
+    <div class="logo">
+        CNN
+    </div>
+
+    <p>
+        CNN Clone • Functional News Website
+    </p>
+
+</footer>
+
+
+<script>
+
+const articleContainer =
+    document.getElementById("article");
+
+const commentInput =
+    document.getElementById("commentInput");
+
+const commentBtn =
+    document.getElementById("commentBtn");
+
+const commentsList =
+    document.getElementById("commentsList");
+
+
+// ==========================================
+// LOAD SELECTED ARTICLE
+// ==========================================
+
+const article =
+    JSON.parse(
+        localStorage.getItem(
+            "selectedArticle"
+        )
+    );
+
+
+if (article) {
+
+    articleContainer.innerHTML = `
+
+        <span class="article-category">
+            ${article.category}
+        </span>
+
+        <h1>
+            ${article.title}
+        </h1>
+
+        <div class="article-meta">
+
+            By ${article.author}
+
+            • ${article.date}
+
+        </div>
+
+        <img
+            src="${article.image}"
+            class="article-image"
+            alt="${article.title}"
+        >
+
+        <p class="article-description">
+            ${article.description}
+        </p>
+
+        <div class="article-content">
+
+            <p>
+                ${article.content}
+            </p>
+
+            <p>
+                This article is part of the CNN News Functional Clone project. 
+                The news content is dynamically loaded through an Express API.
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+else {
+
+    articleContainer.innerHTML = `
+
+        <div class="error-message">
+
+            <h1>
+                Article not found
+            </h1>
+
+            <p>
+                Please return to the homepage and select an article.
+            </p>
+
+            <a
+                href="index.html"
+                class="back-btn"
+            >
+                Back to Home
+            </a>
+
+        </div>
+
+    `;
+
+}
+
+
+// ==========================================
+// COMMENTS
+// ==========================================
+
+function loadComments() {
+
+    const savedComments =
+        JSON.parse(
+            localStorage.getItem(
+                "cnnComments"
+            )
+        ) || [];
+
+
+    commentsList.innerHTML = "";
+
+
+    savedComments.forEach(
+        comment => {
+
+            const element =
+                document.createElement("p");
+
+            element.className =
+                "comment";
+
+            element.textContent =
+                comment;
+
+            commentsList.appendChild(
+                element
+            );
+
+        }
+    );
+
+}
+
+
+commentBtn.addEventListener(
+    "click",
+    () => {
+
+        const text =
+            commentInput.value.trim();
+
+
+        if (!text) {
+
+            alert(
+                "Please write a comment first."
+            );
+
+            return;
+
+        }
+
+
+        const comments =
+            JSON.parse(
+                localStorage.getItem(
+                    "cnnComments"
+                )
+            ) || [];
+
+
+        comments.push(text);
+
+
+        localStorage.setItem(
+            "cnnComments",
+            JSON.stringify(comments)
+        );
+
+
+        commentInput.value = "";
+
+
+        loadComments();
+
+    }
+);
+
+
+loadComments();
+
+</script>
+
+</body>
+
+</html>
