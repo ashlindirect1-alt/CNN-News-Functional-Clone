@@ -1,113 +1,54 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 app.use(express.json());
 
-// Serve frontend files
+// Serve the public folder
 app.use(express.static(path.join(__dirname, "public")));
 
-// ===============================
-// NEWS API
-// ===============================
-
+// API endpoint
 app.get("/api/news", (req, res) => {
-
     try {
+        const filePath = path.join(__dirname, "data", "news.json");
 
-        const filePath = path.join(
-            __dirname,
-            "data",
-            "news.json"
-        );
+        const newsData = fs.readFileSync(filePath, "utf8");
+        const articles = JSON.parse(newsData);
 
-        const newsData = fs.readFileSync(
-            filePath,
-            "utf8"
-        );
-
-        const news = JSON.parse(newsData);
+        const formattedArticles = articles.map(article => ({
+            id: article.id,
+            title: article.title,
+            description: article.description,
+            content: article.content,
+            author: article.author,
+            publishedAt: article.date,
+            urlToImage: article.image,
+            url: "#",
+            category: article.category,
+            source: {
+                name: article.category + " News"
+            }
+        }));
 
         res.json({
             status: "ok",
-            totalResults: news.length,
-            articles: news
+            totalResults: formattedArticles.length,
+            articles: formattedArticles
         });
 
     } catch (error) {
-
-        console.error("News loading error:", error);
-
-        res.status(500).json({
-            status: "error",
-            message: "Unable to load news."
-        });
-
-    }
-
-});
-
-
-// ===============================
-// SINGLE ARTICLE API
-// ===============================
-
-app.get("/api/news/:id", (req, res) => {
-
-    try {
-
-        const filePath = path.join(
-            __dirname,
-            "data",
-            "news.json"
-        );
-
-        const newsData = fs.readFileSync(
-            filePath,
-            "utf8"
-        );
-
-        const news = JSON.parse(newsData);
-
-        const article = news.find(
-            item => item.id == req.params.id
-        );
-
-        if (!article) {
-
-            return res.status(404).json({
-                error: "Article not found"
-            });
-
-        }
-
-        res.json(article);
-
-    } catch (error) {
-
-        console.error(error);
+        console.error("News Error:", error);
 
         res.status(500).json({
-            error: "Unable to load article"
+            error: "Unable to load news.json"
         });
-
     }
-
 });
 
-
-// ===============================
-// START SERVER
-// ===============================
-
+// Start server
 app.listen(PORT, () => {
-
-    console.log(
-        `CNN News Clone running at http://localhost:${PORT}`
-    );
-
+    console.log(`CNN News Clone running at http://localhost:${PORT}`);
 });

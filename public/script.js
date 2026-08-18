@@ -1,138 +1,90 @@
-// ==========================================
+// ===============================
 // CNN NEWS FUNCTIONAL CLONE
-// ==========================================
+// ===============================
 
-const featuredNews =
-    document.getElementById("featuredNews");
+const featuredNews = document.getElementById("featuredNews");
+const worldNews = document.getElementById("worldNews");
+const politicsNews = document.getElementById("politicsNews");
+const businessNews = document.getElementById("businessNews");
+const technologyNews = document.getElementById("technologyNews");
+const sportsNews = document.getElementById("sportsNews");
+const entertainmentNews = document.getElementById("entertainmentNews");
 
-const worldNews =
-    document.getElementById("worldNews");
-
-const politicsNews =
-    document.getElementById("politicsNews");
-
-const businessNews =
-    document.getElementById("businessNews");
-
-const technologyNews =
-    document.getElementById("technologyNews");
-
-const sportsNews =
-    document.getElementById("sportsNews");
-
-const entertainmentNews =
-    document.getElementById("entertainmentNews");
-
-const breakingText =
-    document.getElementById("breakingText");
-
-const searchInput =
-    document.getElementById("searchInput");
-
-const searchBtn =
-    document.getElementById("searchBtn");
-
-const searchSection =
-    document.getElementById("searchSection");
-
-const searchResults =
-    document.getElementById("searchResults");
-
+const breakingText = document.getElementById("breakingText");
 
 let allArticles = [];
 
 
-// ==========================================
-// LOAD NEWS FROM EXPRESS API
-// ==========================================
+// ===============================
+// LOAD NEWS
+// ===============================
 
 async function loadNews() {
 
     try {
 
-        breakingText.textContent =
-            "Loading latest headlines...";
+        const response = await fetch("/api/news");
 
-        const response =
-            await fetch("/api/news");
+        const data = await response.json();
 
         if (!response.ok) {
-
-            throw new Error(
-                "Unable to load news from server."
-            );
-
+            throw new Error(data.error || "Unable to load news");
         }
 
-        const data =
-            await response.json();
+        allArticles = data.articles || [];
 
-        allArticles =
-            data.articles || [];
-
-        console.log(
-            "News loaded:",
-            allArticles
-        );
+        console.log("News loaded:", allArticles);
 
         displayNews(allArticles);
 
-    }
+    } catch (error) {
 
-    catch (error) {
-
-        console.error(
-            "News loading error:",
-            error
-        );
+        console.error("News loading error:", error);
 
         featuredNews.innerHTML = `
-            <div class="error-message">
-                <h3>Unable to load news</h3>
-                <p>
-                    Please make sure the Node.js server is running.
-                </p>
+            <div class="news-card">
+                <div class="card-content">
+                    <h3>Unable to load news</h3>
+                    <p>
+                        Please make sure the Node.js server is running.
+                    </p>
+                </div>
             </div>
         `;
 
         breakingText.textContent =
             "Unable to load latest headlines.";
-
     }
-
 }
 
 
-// ==========================================
+// ===============================
 // CREATE NEWS CARD
-// ==========================================
+// ===============================
 
 function createCard(article) {
 
-    const card =
-        document.createElement("article");
+    const card = document.createElement("article");
 
-    card.className =
-        "news-card";
-
+    card.className = "news-card";
 
     const image =
         article.image ||
+        article.urlToImage ||
         "https://via.placeholder.com/600x350";
-
 
     card.innerHTML = `
 
         <img
             src="${image}"
-            alt="${article.title}"
+            alt="News image"
             onerror="this.src='https://via.placeholder.com/600x350'"
         >
 
         <div class="card-content">
 
-            <span class="category">
-                ${article.category}
+            <span>
+                ${article.category || "News"}
             </span>
 
             <h3>
@@ -140,108 +92,47 @@ function createCard(article) {
             </h3>
 
             <p>
-                ${article.description}
+                ${article.description || "Read the latest news story."}
             </p>
 
-            <div class="card-footer">
-
-                <span>
-                    ${article.date}
-                </span>
-
-                <button class="read-btn">
-                    Read Article
-                </button>
-
-            </div>
+            <button class="read-btn">
+                Read Article
+            </button>
 
         </div>
     `;
 
 
-    const readButton =
-        card.querySelector(".read-btn");
-
-
-    readButton.addEventListener(
-        "click",
-        () => {
+    card
+        .querySelector(".read-btn")
+        .addEventListener("click", () => {
 
             localStorage.setItem(
                 "selectedArticle",
                 JSON.stringify(article)
             );
 
-            window.location.href =
-                "article.html";
-
-        }
-    );
+            window.location.href = "article.html";
+        });
 
 
     return card;
-
 }
 
 
-// ==========================================
-// DISPLAY CATEGORY
-// ==========================================
-
-function displayCategory(
-    container,
-    articles,
-    category
-) {
-
-    container.innerHTML = "";
-
-    const categoryArticles =
-        articles
-            .filter(
-                article =>
-                    article.category === category
-            )
-            .slice(0, 4);
-
-
-    if (categoryArticles.length === 0) {
-
-        container.innerHTML = `
-            <p class="no-news">
-                No ${category} news available.
-            </p>
-        `;
-
-        return;
-
-    }
-
-
-    categoryArticles.forEach(
-        article => {
-
-            container.appendChild(
-                createCard(article)
-            );
-
-        }
-    );
-
-}
-
-
-// ==========================================
-// DISPLAY ALL NEWS
-// ==========================================
+// ===============================
+// DISPLAY NEWS
+// ===============================
 
 function displayNews(articles) {
 
     featuredNews.innerHTML = "";
-
-    searchSection.classList.add(
-        "hidden"
-    );
+    worldNews.innerHTML = "";
+    politicsNews.innerHTML = "";
+    businessNews.innerHTML = "";
+    technologyNews.innerHTML = "";
+    sportsNews.innerHTML = "";
+    entertainmentNews.innerHTML = "";
 
 
     // Breaking News
@@ -251,70 +142,152 @@ function displayNews(articles) {
         breakingText.textContent =
             articles[0].title;
 
+    } else {
+
+        breakingText.textContent =
+            "No news available.";
     }
 
 
-    // Top Stories
+    // ===========================
+    // TOP STORIES
+    // ===========================
 
-    const featured =
-        articles.slice(0, 6);
-
-
-    featured.forEach(
-        article => {
+    articles
+        .slice(0, 6)
+        .forEach(article => {
 
             featuredNews.appendChild(
                 createCard(article)
             );
 
-        }
-    );
+        });
 
 
-    // Categories
-
-    displayCategory(
-        worldNews,
-        articles,
-        "World"
-    );
+    // ===========================
+    // WORLD
+    // ===========================
 
     displayCategory(
-        politicsNews,
         articles,
-        "Politics"
+        "World",
+        worldNews
     );
+
+
+    // ===========================
+    // POLITICS
+    // ===========================
 
     displayCategory(
-        businessNews,
         articles,
-        "Business"
+        "Politics",
+        politicsNews
     );
+
+
+    // ===========================
+    // BUSINESS
+    // ===========================
 
     displayCategory(
-        technologyNews,
         articles,
-        "Technology"
+        "Business",
+        businessNews
     );
+
+
+    // ===========================
+    // TECHNOLOGY
+    // ===========================
 
     displayCategory(
-        sportsNews,
         articles,
-        "Sports"
+        "Technology",
+        technologyNews
     );
+
+
+    // ===========================
+    // SPORTS
+    // ===========================
 
     displayCategory(
-        entertainmentNews,
         articles,
-        "Entertainment"
+        "Sports",
+        sportsNews
     );
 
+
+    // ===========================
+    // ENTERTAINMENT
+    // ===========================
+
+    displayCategory(
+        articles,
+        "Entertainment",
+        entertainmentNews
+    );
 }
 
 
-// ==========================================
+// ===============================
+// DISPLAY CATEGORY
+// ===============================
+
+function displayCategory(
+    articles,
+    category,
+    container
+) {
+
+    const filteredArticles =
+        articles
+            .filter(article =>
+                article.category?.toLowerCase() ===
+                category.toLowerCase()
+            )
+            .slice(0, 4);
+
+
+    filteredArticles.forEach(article => {
+
+        container.appendChild(
+            createCard(article)
+        );
+
+    });
+}
+
+
+// ===============================
 // SEARCH
-// ==========================================
+// ===============================
+
+const searchBtn =
+    document.getElementById("searchBtn");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+
+searchBtn.addEventListener(
+    "click",
+    searchNews
+);
+
+
+searchInput.addEventListener(
+    "keypress",
+    event => {
+
+        if (event.key === "Enter") {
+            searchNews();
+        }
+
+    }
+);
+
 
 function searchNews() {
 
@@ -326,131 +299,39 @@ function searchNews() {
 
     if (!query) {
 
-        searchSection.classList.add(
-            "hidden"
-        );
-
         displayNews(allArticles);
 
         return;
-
     }
 
 
     const results =
-        allArticles.filter(
-            article => {
+        allArticles.filter(article =>
 
-                const title =
-                    article.title
-                        ?.toLowerCase() || "";
+            article.title
+                ?.toLowerCase()
+                .includes(query)
 
-                const description =
-                    article.description
-                        ?.toLowerCase() || "";
+            ||
 
-                const category =
-                    article.category
-                        ?.toLowerCase() || "";
+            article.description
+                ?.toLowerCase()
+                .includes(query)
 
-                const content =
-                    article.content
-                        ?.toLowerCase() || "";
+            ||
 
-
-                return (
-                    title.includes(query) ||
-                    description.includes(query) ||
-                    category.includes(query) ||
-                    content.includes(query)
-                );
-
-            }
+            article.category
+                ?.toLowerCase()
+                .includes(query)
         );
 
 
-    // Hide normal sections
-
-    document
-        .querySelectorAll("main > section:not(#searchSection)")
-        .forEach(section => {
-
-            section.classList.add(
-                "hidden"
-            );
-
-        });
-
-
-    // Show search section
-
-    searchSection.classList.remove(
-        "hidden"
-    );
-
-
-    searchResults.innerHTML = "";
-
-
-    if (results.length === 0) {
-
-        searchResults.innerHTML = `
-            <div class="error-message">
-                <h3>No results found</h3>
-                <p>
-                    Try searching for another keyword.
-                </p>
-            </div>
-        `;
-
-        return;
-
-    }
-
-
-    results.forEach(
-        article => {
-
-            searchResults.appendChild(
-                createCard(article)
-            );
-
-        }
-    );
-
+    displayNews(results);
 }
 
 
-// ==========================================
-// SEARCH BUTTON
-// ==========================================
-
-searchBtn.addEventListener(
-    "click",
-    searchNews
-);
-
-
-// ==========================================
-// SEARCH WITH ENTER KEY
-// ==========================================
-
-searchInput.addEventListener(
-    "keydown",
-    event => {
-
-        if (event.key === "Enter") {
-
-            searchNews();
-
-        }
-
-    }
-);
-
-
-// ==========================================
-// LOAD APPLICATION
-// ==========================================
+// ===============================
+// START
+// ===============================
 
 loadNews();
